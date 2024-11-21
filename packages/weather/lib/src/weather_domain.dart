@@ -36,6 +36,7 @@ class Weather {
   String? _country, _areaName, _weatherMain, _weatherDescription, _weatherIcon;
   Temperature? _temperature, _tempMin, _tempMax, _tempFeelsLike;
   Map<String, dynamic>? _weatherData;
+  double? _visibility;
 
   DateTime? _date, _sunrise, _sunset;
   double? _latitude,
@@ -65,6 +66,7 @@ class Weather {
 
     _latitude = _unpackDouble(coord, 'lat');
     _longitude = _unpackDouble(coord, 'lon');
+    _visibility = _unpackDouble(jsonData, 'visibility');
 
     _country = _unpackString(sys, 'country');
     _sunrise = _unpackDate(sys, 'sunrise');
@@ -109,12 +111,15 @@ class Weather {
     Place Name: $_areaName [$_country] ($latitude, $longitude)
     Date: $_date
     Weather: $_weatherMain, $_weatherDescription
+    Visibility: $_visibility meters
     Temp: $_temperature, Temp (min): $_tempMin, Temp (max): $_tempMax,  Temp (feels like): $_tempFeelsLike
     Sunrise: $_sunrise, Sunset: $_sunset
     Wind: speed $_windSpeed, degree: $_windDegree, gust $_windGust
     Weather Condition code: $_weatherConditionCode
     ''';
   }
+
+  double? get visibility => _visibility;
 
   /// A long description of the weather
   String? get weatherDescription => _weatherDescription;
